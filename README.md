@@ -79,3 +79,8 @@ Either `users` or `users_groups` is **required**
 | Name  | Description                                                                                                                                                                                                       |
 | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | users | Created users in the format `{ name = { name, arn, access_key_id, access_key_secret_unencrypted, access_key_secret_encrypted, access_key_secret_decrypt_command, password_encrypted, password_decrypt_command }}` |
+
+## Similar modules
+
+- [terraform-aws-bulk-iam-groups](https://github.com/olivr-com/terraform-aws-bulk-iam-groups)
+- [terraform-aws-bulk-iam-roles](https://github.com/olivr-com/terraform-aws-bulk-iam-roles)
