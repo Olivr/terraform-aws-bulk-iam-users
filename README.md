@@ -4,28 +4,24 @@ Create many AWS IAM users at once.
 
 ## Examples
 
-### Simple example to create users with access_keys
+### Simple example to create users with access_keys (unencrypted)
 
 ```hcl
 module "iam_users" {
-  source = "github.com/OlivrDotCom/terraform-aws-bulk-iam-users"
+  source = "github.com/olivr-com/terraform-aws-bulk-iam-users"
 
   users              = ["user-1", "user-2"]
   create_access_keys = true
 }
-
-output "iam_users" {
-  value = module.iam_users.users
-}
 ```
 
-### Create users with console access, programmatic access and group memberships
+### Complete example to create users with console access, programmatic access and group memberships
 
-> You need to [create the groups](https://github.com/OlivrDotCom/terraform-aws-bulk-iam-groups) first
+> You need to [create the groups](https://github.com/olivr-com/terraform-aws-bulk-iam-groups) first
 
 ```hcl
 module "iam_users" {
-  source = "github.com/OlivrDotCom/terraform-aws-bulk-iam-users"
+  source = "github.com/olivr-com/terraform-aws-bulk-iam-users"
 
   force_destroy         = true
   create_access_keys    = true
