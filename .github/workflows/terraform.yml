@@ -5,6 +5,8 @@ on:
   pull_request:
 
 jobs:
+  env:
+    AWS_DEFAULT_REGION: us-east-1
   terraform:
     runs-on: ubuntu-latest
     steps:
@@ -15,14 +17,20 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
+      - name: Use example users_groups to test
+        run: mv _var_users_groups.example.json _var_users_groups.auto.tfvars.json
+
       - name: Validate Terraform config
         run: terraform validate
-        env:
-          AUTH0_CLIENT_ID: test
-          AUTH0_CLIENT_SECRET: test
-          AWS_REGION: test
 
       - name: Terraform security scan
         uses: triat/terraform-security-scan@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Terraform plan
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: terraform plan -no-color
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -1,0 +1,7 @@
+{
+  "users_groups": {
+    "terraform-otheraccount": ["OtherAccountAdministrators"],
+    "terraform-identity": ["IdentityAccountAdministrators"],
+    "terraform-superadmin": ["SuperAdministrators"]
+  }
+}

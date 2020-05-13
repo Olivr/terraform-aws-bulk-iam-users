@@ -12,5 +12,5 @@ output "users" {
       password_decrypt_command          = try(length(regexall("^keybase", var.pgp_key)), 0) > 0 && lookup(lookup(aws_iam_user_login_profile.console_access, user.name, {}), "encrypted_password", null) != null ? "echo '${aws_iam_user_login_profile.console_access[user.name].encrypted_password}' | base64 --decode | keybase pgp decrypt" : null
     }
   }
-  description = "Created users in the format { name = { name, arn, access_key_id, access_key_secret_unencrypted, access_key_secret_encrypted, access_key_secret_decrypt_command, password_encrypted, password_decrypt_command }}"
+  description = "Map of created users."
 }
