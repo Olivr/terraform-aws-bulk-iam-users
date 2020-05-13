@@ -18,7 +18,7 @@ jobs:
         run: terraform init
 
       - name: Use examples to test
-        run: for i in *.example.tfvars*; do echo mv -- "$i" "${i/.example.tfvars/.auto.tfvars}"; done
+        run: for i in *.example.tfvars*; do mv -- "$i" "${i/.example.tfvars/.auto.tfvars}"; done
 
       - name: Validate Terraform config
         run: terraform validate
