@@ -47,6 +47,37 @@ output "iam_users" {
 ```
 
 <!-- auto-terraform-docs -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.12.24 |
+| aws | ~> 2.58 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | ~> 2.58 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| create\_access\_keys | Set to true to create programmatic access for all users | `bool` | `false` | no |
+| create\_login\_profiles | Set to true to create console access for all users | `bool` | `false` | no |
+| force\_destroy | When destroying users, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force\_destroy users with non-Terraform-managed access keys and login profile will fail to be destroyed. | `bool` | `false` | no |
+| module\_depends\_on | Use this if you want this module to run after other modules | `list` | `[]` | no |
+| pgp\_key | PGP key in plain text or using the format `keybase:username` to encrypt user keys and passwords | `string` | `null` | no |
+| tags | Tags to add to all users | `map(string)` | `{}` | no |
+| users | Users to create in a simple list format [user1, user2]. Use either variable `users` or `users_groups` | `list(string)` | `[]` | no |
+| users\_groups | Users to create in the format { user1 = [group1, group2], user2 = [group2, group3] }. The groups must exist already. Use either variable `users` or `users_groups` | `map(list(string))` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| users | Created users in the format { name = { name, arn, access\_key\_id, access\_key\_secret\_unencrypted, access\_key\_secret\_encrypted, access\_key\_secret\_decrypt\_command, password\_encrypted, password\_decrypt\_command }} |
 
 <!-- auto-terraform-docs -->
 
@@ -54,3 +85,31 @@ output "iam_users" {
 
 - [terraform-aws-bulk-iam-groups](https://github.com/olivr-com/terraform-aws-bulk-iam-groups)
 - [terraform-aws-bulk-iam-roles](https://github.com/olivr-com/terraform-aws-bulk-iam-roles)
+
+<!-- auto-support -->
+
+## Support
+
+Create a new issue on this GitHub repository.
+
+<!-- auto-support -->
+<!-- auto-contribute -->
+
+## Contributing
+
+All contributions are welcome! Please see the [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)
+
+<!-- auto-contribute -->
+<!-- auto-license -->
+## License
+
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details
+
+<!-- auto-license -->
+<!-- auto-about-org -->
+
+## About olivr
+
+[Olivr](https://olivr.com) is an AI co-founder for your startup.
+
+<!-- auto-about-org -->
