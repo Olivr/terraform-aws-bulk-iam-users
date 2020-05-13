@@ -1,6 +1,6 @@
 # terraform-aws-bulk-iam-users
 
-Create many AWS IAM users at once.
+Terraform module to create many AWS IAM users at once.
 
 ## Examples
 
@@ -46,39 +46,9 @@ output "iam_users" {
 }
 ```
 
-## Requirements
+<!-- auto-terraform-docs -->
 
-| Name      | Version    |
-| --------- | ---------- |
-| terraform | ~> 0.12.24 |
-| aws       | ~> 2.58    |
-
-## Providers
-
-| Name | Version |
-| ---- | ------- |
-| aws  | ~> 2.58 |
-
-## Inputs
-
-Either `users` or `users_groups` is **required**
-
-| Name                  | Description                                                                                                                                                                             | Type                | Default | Required |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ------- | :------: |
-| create_access_keys    | Set to true to create programmatic access for all users                                                                                                                                 | `bool`              | `false` |    no    |
-| create_login_profiles | Set to true to create console access for all users                                                                                                                                      | `bool`              | `false` |    no    |
-| force_destroy         | When destroying users, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices                                                                       | `bool`              | `false` |    no    |
-| module_depends_on     | Use this if you want this module to run after other modules                                                                                                                             | `list(string)`      | `[]`    |    no    |
-| pgp_key               | PGP key in plain text or using the format `keybase:username` to encrypt user keys and passwords                                                                                         | `string`            | `null`  |    no    |
-| tags                  | Tags to add to all users                                                                                                                                                                | `map(string)`       | `{}`    |    no    |
-| users                 | Users to create in a simple list format [user1, user2]. Use either variable `users` or `users_groups`                                                                                   | `list(string)`      | `[]`    |    no    |
-| users_groups          | Users to create in the format { user1 = [group1, group2], user2 = [group2, group3] }. The groups must exist already. `users_groups` takes precedence over `users` if both are specified | `map(list(string))` | `{}`    |    no    |
-
-## Outputs
-
-| Name  | Description                                                                                                                                                                                                       |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| users | Created users in the format `{ name = { name, arn, access_key_id, access_key_secret_unencrypted, access_key_secret_encrypted, access_key_secret_decrypt_command, password_encrypted, password_decrypt_command }}` |
+<!-- auto-terraform-docs -->
 
 ## Similar modules
 

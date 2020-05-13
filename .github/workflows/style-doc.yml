@@ -1,0 +1,114 @@
+name: 'Style and documentation'
+
+on: push
+
+jobs:
+  main:
+    name: Style and documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      ##################################################################
+      ## Download generic organization-wide files and Readme sections ##
+      ##################################################################
+
+      - name: Config - Markdown linting
+        uses: olivr-com/download-file-action@v1
+        with:
+          url: https://raw.githubusercontent.com/olivr-com/defaults/master/linters/markdown/.markdownlint.yml
+
+      - name: docs/CONTRIBUTING.md
+        uses: olivr-com/download-file-action@v1
+        with:
+          url: https://raw.githubusercontent.com/olivr-com/defaults/master/docs/CONTRIBUTING.md
+          path: docs
+
+      - name: docs/CODE_OF_CONDUCT.md
+        uses: olivr-com/download-file-action@v1
+        with:
+          url: https://raw.githubusercontent.com/olivr-com/defaults/master/docs/CODE_OF_CONDUCT.md
+          path: docs
+
+      - name: docs/SECURITY.md
+        uses: olivr-com/download-file-action@v1
+        with:
+          url: https://raw.githubusercontent.com/olivr-com/defaults/master/docs/SECURITY.md
+          path: docs
+
+      - name: LICENSE
+        uses: olivr-com/download-file-action@v1
+        with:
+          url: https://raw.githubusercontent.com/olivr-com/defaults/master/LICENSE
+
+      - name: README.md - Support
+        uses: olivr-com/inject-file-action@v1
+        with:
+          url: https://raw.githubusercontent.com/olivr-com/defaults/master/readme/support.md
+          target: README.md
+
+      - name: README.md - Contributing
+        uses: olivr-com/inject-file-action@v1
+        with:
+          url: https://raw.githubusercontent.com/olivr-com/defaults/master/readme/contribute.md
+          target: README.md
+
+      - name: README.md - License
+        uses: olivr-com/inject-file-action@v1
+        with:
+          url: https://raw.githubusercontent.com/olivr-com/defaults/master/readme/license.md
+          target: README.md
+
+      - name: README.md - About organization
+        uses: olivr-com/inject-file-action@v1
+        with:
+          url: https://raw.githubusercontent.com/olivr-com/defaults/master/readme/about-org.md
+          target: README.md
+
+      ########################################
+      ## Terraform specific readme sections ##
+      ########################################
+
+      - name: Install terraform-docs
+        run: GO111MODULE="on" go get github.com/segmentio/terraform-docs@v0.9.1
+
+      - name: README.md - Requirements/Providers/Inputs/Outputs
+        uses: olivr-com/inject-command-action@v1
+        with:
+          command: $(go env GOPATH)/bin/terraform-docs md ./ --no-header
+          target: README.md
+          pattern: <!-- auto-terraform-docs -->
+
+      ################
+      ## Lint files ##
+      ################
+
+      - name: Markdown Lint
+        uses: avto-dev/markdown-lint@v1
+        with:
+          args: '**/*.md'
+          fix: true
+          config: .markdownlint.yml
+
+      - name: Cleanup Markdown config
+        run: rm -rf .markdownlint.yml
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform Format
+        run: terraform fmt
+
+      - name: Terraform Lint
+        uses: actionshub/terraform-lint@master
+
+      ##########################
+      ## Commit changed files ##
+      ##########################
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4.1.6
+        with:
+          commit_message: Update documentation
+          branch: ${{ github.head_ref }}

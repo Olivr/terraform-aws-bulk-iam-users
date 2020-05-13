@@ -1,0 +1,28 @@
+name: 'Build'
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: hashicorp/setup-terraform@v1
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Validate Terraform config
+        run: terraform validate
+        env:
+          AUTH0_CLIENT_ID: test
+          AUTH0_CLIENT_SECRET: test
+          AWS_REGION: test
+
+      - name: Terraform security scan
+        uses: triat/terraform-security-scan@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
