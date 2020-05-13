@@ -45,7 +45,8 @@ resource "aws_iam_user_login_profile" "console_access" {
  */
 
 resource "aws_iam_group_membership" "programmatic_users" {
-  for_each = transpose(var.users_groups)
+  depends_on = [aws_iam_user.users]
+  for_each   = transpose(var.users_groups)
 
   name  = "usergroups"
   group = each.key
