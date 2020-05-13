@@ -51,37 +51,36 @@ output "iam_users" {
 ```
 
 <!-- auto-terraform-docs -->
-
 ## Requirements
 
-| Name      | Version    |
-| --------- | ---------- |
+| Name | Version |
+|------|---------|
 | terraform | ~> 0.12.24 |
-| aws       | ~> 2.58    |
+| aws | ~> 2.58 |
 
 ## Providers
 
 | Name | Version |
-| ---- | ------- |
-| aws  | ~> 2.58 |
+|------|---------|
+| aws | ~> 2.58 |
 
 ## Inputs
 
-| Name                  | Description                                                                                                                                                                                                                        | Type                | Default | Required |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ------- | :------: |
-| create_access_keys    | Set to true to create programmatic access for all users                                                                                                                                                                            | `bool`              | `false` |    no    |
-| create_login_profiles | Set to true to create console access for all users                                                                                                                                                                                 | `bool`              | `false` |    no    |
-| force_destroy         | When destroying users, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy users with non-Terraform-managed access keys and login profile will fail to be destroyed. | `bool`              | `false` |    no    |
-| module_depends_on     | Use this if you want this module to run after other modules                                                                                                                                                                        | `list`              | `[]`    |    no    |
-| pgp_key               | PGP key in plain text or using the format `keybase:username` to encrypt user keys and passwords                                                                                                                                    | `string`            | `null`  |    no    |
-| tags                  | Tags to add to all users                                                                                                                                                                                                           | `map(string)`       | `{}`    |    no    |
-| users                 | Users to create in a simple list format `["user1", "user2"]. Use either variable`users`or`users_groups                                                                                                                             | `list(string)`      | `[]`    |    no    |
-| users_groups          | Users to create in a map format to specify group memberships. The groups must exist already. Use either variable `users` or `users_groups`. See [\_var_aws_iam_users.example.json](_var_aws_iam_users.example.json)                | `map(list(string))` | `{}`    |    no    |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| create\_access\_keys | Set to true to create programmatic access for all users | `bool` | `false` | no |
+| create\_login\_profiles | Set to true to create console access for all users | `bool` | `false` | no |
+| force\_destroy | When destroying users, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force\_destroy users with non-Terraform-managed access keys and login profile will fail to be destroyed. | `bool` | `false` | no |
+| module\_depends\_on | Use this if you want this module to run after other modules | `list` | `[]` | no |
+| pgp\_key | PGP key in plain text or using the format `keybase:username` to encrypt user keys and passwords | `string` | `null` | no |
+| tags | Tags to add to all users | `map(string)` | `{}` | no |
+| users | Users to create in a simple list format `["user1", "user2"]. Use either variable`users` or `users\_groups | `list(string)` | `[]` | no |
+| users\_groups | Users to create in a map format to specify group memberships. The groups must exist already. Use either variable `users` or `users_groups`. See [\_var\_users\_groups.example.json](\_var\_users\_groups.example.json) | `map(list(string))` | `{}` | no |
 
 ## Outputs
 
-| Name  | Description           |
-| ----- | --------------------- |
+| Name | Description |
+|------|-------------|
 | users | Map of created users. |
 
 <!-- auto-terraform-docs -->
@@ -106,7 +105,6 @@ All contributions are welcome! Please see the [docs/CONTRIBUTING.md](docs/CONTRI
 
 <!-- auto-contribute -->
 <!-- auto-license -->
-
 ## License
 
 This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details
