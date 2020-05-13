@@ -75,7 +75,7 @@ output "iam_users" {
 | pgp\_key | PGP key in plain text or using the format `keybase:username` to encrypt user keys and passwords | `string` | `null` | no |
 | tags | Tags to add to all users | `map(string)` | `{}` | no |
 | users | Users to create in a simple list format `["user1", "user2"]. Use either variable`users` or `users\_groups | `list(string)` | `[]` | no |
-| users\_groups | Users to create in a map format to specify group memberships. The groups must exist already. Use either variable `users` or `users_groups`. See [\_var\_users\_groups.example.json](\_var\_users\_groups.example.json) | `map(list(string))` | `{}` | no |
+| users\_groups | Users to create in a map format to specify group memberships. The groups must exist already. Use either variable `users` or `users_groups`. See [\_var\_users\_groups.example.tfvars.json](\_var\_users\_groups.example.tfvars.json) | `map(list(string))` | `{}` | no |
 
 ## Outputs
 
