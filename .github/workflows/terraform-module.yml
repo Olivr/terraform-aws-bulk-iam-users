@@ -17,8 +17,8 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
-      - name: Use example users_groups to test
-        run: mv _var_users_groups.example.json _var_users_groups.auto.tfvars.json
+      - name: Use examples to test
+        run: for i in *.example.tfvars*; do echo mv -- "$i" "${i/.example.tfvars/.auto.tfvars}"; done
 
       - name: Validate Terraform config
         run: terraform validate
