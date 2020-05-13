@@ -70,14 +70,14 @@ output "iam_users" {
 | module\_depends\_on | Use this if you want this module to run after other modules | `list` | `[]` | no |
 | pgp\_key | PGP key in plain text or using the format `keybase:username` to encrypt user keys and passwords | `string` | `null` | no |
 | tags | Tags to add to all users | `map(string)` | `{}` | no |
-| users | Users to create in a simple list format [user1, user2]. Use either variable `users` or `users_groups` | `list(string)` | `[]` | no |
-| users\_groups | Users to create in the format { user1 = [group1, group2], user2 = [group2, group3] }. The groups must exist already. Use either variable `users` or `users_groups` | `map(list(string))` | `{}` | no |
+| users | Users to create in a simple list format `["user1", "user2"]. Use either variable`users` or `users\_groups | `list(string)` | `[]` | no |
+| users\_groups | Users to create in a map format to specify group memberships. The groups must exist already. Use either variable `users` or `users_groups`. See [\_var\_aws\_iam\_users.example.json](\_var\_aws\_iam\_users.example.json) | `map(list(string))` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| users | Created users in the format { name = { name, arn, access\_key\_id, access\_key\_secret\_unencrypted, access\_key\_secret\_encrypted, access\_key\_secret\_decrypt\_command, password\_encrypted, password\_decrypt\_command }} |
+| users | Map of created users. |
 
 <!-- auto-terraform-docs -->
 
