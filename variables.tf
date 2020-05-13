@@ -6,7 +6,7 @@ variable "users" {
 
 variable "users_groups" {
   type        = map(list(string))
-  description = "Users to create in a map format to specify group memberships. The groups must exist already. Use either variable `users` or `users_groups`. See [_var_aws_iam_users.example.json](_var_aws_iam_users.example.json)"
+  description = "Users to create in a map format to specify group memberships. The groups must exist already. Use either variable `users` or `users_groups`. See [_var_users_groups.example.json](_var_users_groups.example.json)"
   default     = {}
 }
 
